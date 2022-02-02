@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:173",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -19,1118 +18,142 @@
       }
     ]
   },
-  "description": "Overview of Kubernetes cluster-level metrics",
+  "description": "After selecting your namespace and container you get a wealth of metrics like request rate, error rate, response times, pod count, cpu and memory usage. You can view cpu and memory usage in a variety of ways, compared to the limit, compared to the request, per pod, average per pod, etc.",
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": 12202,
-  "graphTooltip": 0,
-  "id": 9,
-  "iteration": 1641493760738,
+  "gnetId": 11143,
+  "graphTooltip": 1,
+  "id": 37,
+  "iteration": 1643813383603,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
+      "collapsed": false,
       "gridPos": {
-        "h": 4,
-        "w": 6,
+        "h": 1,
+        "w": 24,
         "x": 0,
         "y": 0
-      },
-      "id": 6,
-      "links": [],
-      "options": {
-        "content": "<div class=\"text-center\">\n  <img style=\"height:80px\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/1200px-Kubernetes_logo_without_workmark.svg.png\">\n  <h2 style=\"padding-top:15px\">$k8s_version</h2>\n</div>",
-        "mode": "html"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_status_phase{phase=\"Running\"})",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "type": "text"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "decimals": 2,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 6,
-        "y": 0
-      },
-      "id": 14,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(container_memory_working_set_bytes{container_name!=\"POD\",image!=\"\"})/sum(machine_memory_bytes)*100",
-          "refId": "A"
-        }
-      ],
-      "title": "Cluster Memory Usage",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "decimals": 2,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 12,
-        "y": 0
-      },
-      "id": 15,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container_name!=\"POD\",image!=\"\"}[5m]))/sum(machine_cpu_cores)*100",
-          "refId": "A"
-        }
-      ],
-      "title": "Cluster CPU Usage",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "decimals": 2,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 18,
-        "y": 0
-      },
-      "id": 18,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\"})/sum(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\"})*100",
-          "refId": "A"
-        }
-      ],
-      "title": "Cluster Disk Usage",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 0,
-        "y": 4
-      },
-      "id": 4,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "count(kube_node_spec_unschedulable==0)",
-          "refId": "A"
-        }
-      ],
-      "title": "Healthy Nodes",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 3,
-        "y": 4
-      },
-      "id": 21,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "count(kube_node_spec_unschedulable!=0) OR on() vector(0)",
-          "interval": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Unhealthy Nodes",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 6,
-        "y": 4
-      },
-      "id": 12,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(container_memory_working_set_bytes{container_name!=\"POD\",image!=\"\"})",
-          "refId": "A"
-        }
-      ],
-      "title": "Used",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 4
-      },
-      "id": 19,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(machine_memory_bytes)",
-          "refId": "A"
-        }
-      ],
-      "title": "Total",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "cores"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 12,
-        "y": 4
       },
       "id": 16,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container_name!=\"POD\",image!=\"\"}[5m]))",
-          "refId": "A"
-        }
-      ],
-      "title": "Used",
-      "type": "stat"
+      "panels": [],
+      "title": "Request rate",
+      "type": "row"
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
       "datasource": {
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "editable": true,
+      "error": false,
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "cores"
+          "links": []
         },
         "overrides": []
       },
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 15,
-        "y": 4
-      },
-      "id": 17,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(machine_cpu_cores)",
-          "refId": "A"
-        }
-      ],
-      "title": "Total",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 18,
-        "y": 4
-      },
-      "id": 20,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\"})",
-          "refId": "A"
-        }
-      ],
-      "title": "Used",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 21,
-        "y": 4
-      },
-      "id": 11,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\"})",
-          "refId": "A"
-        }
-      ],
-      "title": "Total",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
+        "h": 7,
+        "w": 12,
         "x": 0,
-        "y": 6
+        "y": 1
       },
-      "id": 24,
+      "hiddenSeries": false,
+      "id": 3,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
       "links": [],
-      "maxDataPoints": 3,
+      "nullPointMode": "connected",
       "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "alertThreshold": true
       },
+      "percentage": false,
       "pluginVersion": "8.3.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(kube_daemonset_status_number_unavailable)",
+          "expr": "sum(irate(http_requests_total{app=\"$container\", handler!=\"prometheus\", kubernetes_namespace=\"$namespace\"}[30s])) by (kubernetes_namespace,app,code)",
           "interval": "",
-          "legendFormat": "Failed",
-          "refId": "A"
+          "intervalFactor": 1,
+          "legendFormat": "native | {{code}}",
+          "refId": "A",
+          "step": 10
         },
         {
-          "expr": "sum(kube_daemonset_status_number_available)",
+          "expr": "sum(irate(nginx_http_requests_total{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (kubernetes_namespace,app,status)",
           "interval": "",
-          "legendFormat": "Running",
-          "refId": "B"
+          "intervalFactor": 1,
+          "legendFormat": "nginx | {{status}}",
+          "refId": "B",
+          "step": 10
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_http_responses_total{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (app,kubernetes_namespace,code)",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "haproxy | {{code}}",
+          "refId": "C",
+          "step": 10
         }
       ],
-      "title": "Daemon Sets",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Request rate",
+      "tooltip": {
+        "msResolution": true,
+        "shared": false,
+        "sort": 0,
+        "value_type": "cumulative"
       },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
       },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 5,
-        "y": 6
-      },
-      "id": 25,
-      "links": [],
-      "maxDataPoints": 3,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
+      "yaxes": [
         {
-          "expr": "count(kube_deployment_created) - count(kube_deployment_status_replicas_available)",
-          "interval": "",
-          "legendFormat": "Failed",
-          "refId": "A"
+          "format": "ops",
+          "logBase": 1,
+          "show": true
         },
         {
-          "expr": "count(kube_deployment_created)",
-          "interval": "",
-          "legendFormat": "Running",
-          "refId": "B"
+          "format": "short",
+          "logBase": 1,
+          "show": true
         }
       ],
-      "title": "Deployments",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 10,
-        "y": 6
-      },
-      "id": 26,
-      "links": [],
-      "maxDataPoints": 3,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_status_phase{phase!=\"Running\"}) OR on() vector(0)",
-          "interval": "",
-          "legendFormat": "Failed",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(kube_pod_status_phase{phase=\"Running\"})",
-          "interval": "",
-          "legendFormat": "Running",
-          "refId": "B"
-        }
-      ],
-      "title": "Pods",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 15,
-        "y": 6
-      },
-      "id": 27,
-      "links": [],
-      "maxDataPoints": 3,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "count(kube_replicaset_created) - count(kube_replicaset_status_ready_replicas)",
-          "interval": "",
-          "legendFormat": "Failed",
-          "refId": "A"
-        },
-        {
-          "expr": "count(kube_replicaset_created)",
-          "interval": "",
-          "legendFormat": "Running",
-          "refId": "B"
-        }
-      ],
-      "title": "Replica Sets",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 20,
-        "y": 6
-      },
-      "id": 29,
-      "links": [],
-      "maxDataPoints": 3,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "expr": "count(kube_statefulset_created) - count(kube_statefulset_status_replicas_ready)",
-          "interval": "",
-          "legendFormat": "Failed",
-          "refId": "A"
-        },
-        {
-          "expr": "count(kube_statefulset_created)",
-          "interval": "",
-          "legendFormat": "Running",
-          "refId": "B"
-        }
-      ],
-      "title": "Stateful Sets",
-      "type": "gauge"
+      "yaxis": {
+        "align": false
+      }
     },
     {
       "aliasColors": {},
@@ -1147,34 +170,39 @@
         },
         "overrides": []
       },
-      "fill": 0,
+      "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 12,
-        "x": 0,
-        "y": 12
+        "x": 12,
+        "y": 1
       },
       "hiddenSeries": false,
-      "id": 22,
+      "id": 15,
       "legend": {
-        "avg": false,
+        "alignAsTable": true,
+        "avg": true,
         "current": false,
-        "max": false,
+        "max": true,
         "min": false,
+        "rightSide": true,
         "show": true,
+        "sort": "avg",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
       "pluginVersion": "8.3.3",
-      "pointradius": 2,
+      "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
@@ -1183,18 +211,832 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(container_memory_working_set_bytes{container_name!=\"POD\",image!=\"\"}) by (namespace)",
-          "instant": false,
-          "interval": "1m",
-          "legendFormat": "{{namespace}}",
-          "refId": "A"
+          "expr": "sum(irate(haproxy_backend_http_responses_total{app=\"$container\", kubernetes_namespace=\"$namespace\",code=\"5xx\"}[30s])) by (app,kubernetes_namespace) / sum(irate(haproxy_backend_http_responses_total{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (app,kubernetes_namespace)",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "haproxy",
+          "refId": "A",
+          "step": 20
+        },
+        {
+          "expr": "sum(irate(http_requests_total{app=\"$container\", handler!=\"prometheus\", kubernetes_namespace=\"$namespace\", code=~\"5[0-9]+\"}[30s])) by (kubernetes_namespace,app) / sum(irate(http_requests_total{app=\"$container\", handler!=\"prometheus\", kubernetes_namespace=\"$namespace\"}[30s])) by (kubernetes_namespace,app)",
+          "intervalFactor": 2,
+          "legendFormat": "native",
+          "refId": "B",
+          "step": 20
+        },
+        {
+          "expr": "sum(irate(nginx_http_requests_total{app=\"$container\", kubernetes_namespace=\"$namespace\", status=~\"5[0-9]+\"}[30s])) by (kubernetes_namespace,app) / sum(irate(nginx_http_requests_total{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (kubernetes_namespace,app)",
+          "intervalFactor": 2,
+          "legendFormat": "nginx",
+          "refId": "C",
+          "step": 20
         }
       ],
       "thresholds": [],
       "timeRegions": [],
-      "title": "Memory Usage",
+      "title": "Error rate",
       "tooltip": {
-        "shared": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percentunit",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 17,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {},
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 9
+          },
+          "id": 5,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (app,kubernetes_namespace,le))",
+              "intervalFactor": 1,
+              "legendFormat": "native | 0.99",
+              "refId": "A",
+              "step": 1
+            },
+            {
+              "expr": "histogram_quantile(0.90, sum(rate(http_request_duration_seconds_bucket{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (app,kubernetes_namespace,le))",
+              "intervalFactor": 1,
+              "legendFormat": "native | 0.90",
+              "refId": "B",
+              "step": 1
+            },
+            {
+              "expr": "histogram_quantile(0.5, sum(rate(http_request_duration_seconds_bucket{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (app,kubernetes_namespace,le))",
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "native | 0.50",
+              "refId": "C",
+              "step": 1
+            },
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(nginx_http_request_duration_seconds_bucket{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (app,kubernetes_namespace,le))",
+              "intervalFactor": 1,
+              "legendFormat": "nginx | 0.99",
+              "refId": "D",
+              "step": 1
+            },
+            {
+              "expr": "histogram_quantile(0.9, sum(rate(nginx_http_request_duration_seconds_bucket{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (app,kubernetes_namespace,le))",
+              "intervalFactor": 1,
+              "legendFormat": "nginx | 0.90",
+              "refId": "E",
+              "step": 1
+            },
+            {
+              "expr": "histogram_quantile(0.5, sum(rate(nginx_http_request_duration_seconds_bucket{app=\"$container\", kubernetes_namespace=\"$namespace\"}[30s])) by (app,kubernetes_namespace,le))",
+              "intervalFactor": 1,
+              "legendFormat": "nginx | 0.50",
+              "refId": "F",
+              "step": 1
+            }
+          ],
+          "thresholds": [],
+          "title": "Response time percentiles",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "s",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "title": "Response time",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 18,
+      "panels": [],
+      "title": "Pod count",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 7,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.3.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "count(count(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (pod))",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "pods",
+          "refId": "A",
+          "step": 5
+        },
+        {
+          "expr": "count(count(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (kubernetes_io_hostname))",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "hosts",
+          "refId": "B",
+          "step": 10
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Number of pods",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 19,
+      "panels": [],
+      "title": "Usage relative to request",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "hiddenSeries": false,
+      "id": 12,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.3.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "elasticsearch-logging-data-20170207a (logging) - system",
+          "color": "#BF1B00"
+        },
+        {
+          "alias": "elasticsearch-logging-data-20170207a (logging) - user",
+          "color": "#508642"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(container_cpu_system_seconds_total{container=\"$container\", namespace=\"$namespace\"}[2m])) by (namespace,container) / sum(container_spec_cpu_shares{container=\"$container\", namespace=\"$namespace\"} / 1024) by (namespace,container)",
+          "intervalFactor": 2,
+          "legendFormat": "system",
+          "refId": "C",
+          "step": 10
+        },
+        {
+          "expr": "sum(irate(container_cpu_user_seconds_total{container=\"$container\", namespace=\"$namespace\"}[2m])) by (namespace,container) / sum(container_spec_cpu_shares{container=\"$container\", namespace=\"$namespace\"} / 1024) by (namespace,container)",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "user",
+          "refId": "B",
+          "step": 10
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Cpu usage (relative to request)",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percentunit",
+          "label": "",
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 20,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 26
+          },
+          "id": 10,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "avg",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(irate(container_cpu_usage_seconds_total{container=\"$container\", namespace=\"$namespace\"}[2m])) by (namespace,container) / sum(container_spec_cpu_quota{container=\"$container\", namespace=\"$namespace\"} / container_spec_cpu_period{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container)",
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "actual",
+              "metric": "",
+              "refId": "A",
+              "step": 1
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Cpu usage (relative to limit)",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percentunit",
+              "label": "",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 26
+          },
+          "id": 11,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "avg",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) / sum(container_spec_memory_limit_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container)",
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "actual",
+              "refId": "A",
+              "step": 1
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Memory usage (relative to limit)",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percentunit",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        }
+      ],
+      "title": "Usage relative to limit",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 21,
+      "panels": [],
+      "title": "Usage per pod",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 27
+      },
+      "hiddenSeries": false,
+      "id": 13,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.3.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(container_cpu_usage_seconds_total{container=\"$container\", namespace=\"$namespace\"}[2m])) by (id,pod)",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{pod}}",
+          "refId": "A",
+          "step": 2
+        },
+        {
+          "expr": "sum(container_spec_cpu_quota{container=\"$container\", namespace=\"$namespace\"} / container_spec_cpu_period{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) / count(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) ",
+          "intervalFactor": 2,
+          "legendFormat": "limit",
+          "refId": "B",
+          "step": 2
+        },
+        {
+          "expr": "sum(container_spec_cpu_shares{container=\"$container\", namespace=\"$namespace\"} / 1024) by (namespace,container) / count(container_spec_cpu_shares{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) ",
+          "intervalFactor": 2,
+          "legendFormat": "request",
+          "refId": "C",
+          "step": 2
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Cpu usage (per pod)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "cores",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 27
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.3.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (id,pod)",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{pod}}",
+          "refId": "A",
+          "step": 2
+        },
+        {
+          "expr": "sum(container_spec_memory_limit_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) / count(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (container,namespace)",
+          "intervalFactor": 2,
+          "legendFormat": "limit",
+          "refId": "B",
+          "step": 2
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Memory usage (per pod)",
+      "tooltip": {
+        "shared": true,
         "sort": 0,
         "value_type": "individual"
       },
@@ -1208,12 +1050,140 @@
         {
           "format": "bytes",
           "logBase": 1,
+          "min": "0",
           "show": true
         },
         {
-          "format": "percentunit",
+          "format": "short",
           "logBase": 1,
-          "show": false
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "id": 22,
+      "panels": [],
+      "title": "Usage per pod (average)",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 35
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.3.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(container_cpu_usage_seconds_total{container=\"$container\", namespace=\"$namespace\"}[2m])) by (namespace,container) / count(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) ",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "actual",
+          "refId": "A",
+          "step": 1
+        },
+        {
+          "expr": "sum(container_spec_cpu_quota{container=\"$container\", namespace=\"$namespace\"} / container_spec_cpu_period{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) / count(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) ",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "limit",
+          "refId": "B",
+          "step": 1
+        },
+        {
+          "expr": "sum(container_spec_cpu_shares{container=\"$container\", namespace=\"$namespace\"} / 1024) by (namespace,container) / count(container_spec_cpu_shares{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) ",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "request",
+          "refId": "C",
+          "step": 1
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Cpu usage (avg per pod)",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "cores",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
         }
       ],
       "yaxis": {
@@ -1229,40 +1199,47 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "editable": true,
+      "error": false,
       "fieldConfig": {
         "defaults": {
           "links": []
         },
         "overrides": []
       },
-      "fill": 0,
+      "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 12
+        "y": 35
       },
       "hiddenSeries": false,
-      "id": 2,
+      "id": 9,
       "legend": {
-        "avg": false,
+        "alignAsTable": true,
+        "avg": true,
         "current": false,
-        "max": false,
+        "max": true,
         "min": false,
+        "rightSide": true,
         "show": true,
+        "sort": "avg",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 2,
-      "nullPointMode": "null",
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
       "pluginVersion": "8.3.3",
-      "pointradius": 2,
+      "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
@@ -1271,18 +1248,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container_name!=\"POD\",namespace!=\"\"}[5m])) by (namespace)",
-          "instant": false,
-          "interval": "1m",
-          "legendFormat": "{{namespace}}",
-          "refId": "A"
+          "expr": "sum(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) / count(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) ",
+          "intervalFactor": 1,
+          "legendFormat": "actual",
+          "metric": "",
+          "refId": "A",
+          "step": 1
+        },
+        {
+          "expr": "sum(container_spec_memory_limit_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) / count(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container) ",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "limit",
+          "refId": "B",
+          "step": 1
         }
       ],
       "thresholds": [],
       "timeRegions": [],
-      "title": "CPU Usage",
+      "title": "Memory usage (avg per pod)",
       "tooltip": {
-        "shared": false,
+        "msResolution": false,
+        "shared": true,
         "sort": 0,
         "value_type": "individual"
       },
@@ -1294,14 +1281,250 @@
       },
       "yaxes": [
         {
-          "format": "percentunit",
+          "format": "bytes",
           "logBase": 1,
+          "min": "0",
           "show": true
         },
         {
-          "format": "percentunit",
+          "format": "short",
           "logBase": 1,
-          "show": false
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      },
+      "id": 23,
+      "panels": [],
+      "title": "Usage total",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 43
+      },
+      "hiddenSeries": false,
+      "id": 1,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.3.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(container_cpu_usage_seconds_total{container=\"$container\", namespace=\"$namespace\"}[2m])) by (namespace,container)",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "actual",
+          "metric": "",
+          "refId": "A",
+          "step": 1
+        },
+        {
+          "expr": "sum(container_spec_cpu_quota{container=\"$container\", namespace=\"$namespace\"} / container_spec_cpu_period{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container)",
+          "intervalFactor": 1,
+          "legendFormat": "limit",
+          "refId": "B",
+          "step": 1
+        },
+        {
+          "expr": "sum(container_spec_cpu_shares{container=\"$container\", namespace=\"$namespace\"} / 1024) by (namespace,container) ",
+          "intervalFactor": 1,
+          "legendFormat": "request",
+          "refId": "C",
+          "step": 1
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Cpu usage (total)",
+      "tooltip": {
+        "msResolution": true,
+        "shared": false,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "cores",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "editable": true,
+      "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 43
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.3.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(container_memory_usage_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container)",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "actual",
+          "refId": "A",
+          "step": 1
+        },
+        {
+          "expr": "sum(container_spec_memory_limit_bytes{container=\"$container\", namespace=\"$namespace\"}) by (namespace,container)",
+          "intervalFactor": 1,
+          "legendFormat": "limit",
+          "refId": "B",
+          "step": 1
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Memory usage (total)",
+      "tooltip": {
+        "msResolution": true,
+        "shared": false,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
         }
       ],
       "yaxis": {
@@ -1309,46 +1532,72 @@
       }
     }
   ],
+  "refresh": false,
   "schemaVersion": 34,
   "style": "dark",
-  "tags": [
-    "kubernetes"
-  ],
+  "tags": [],
   "templating": {
     "list": [
       {
+        "allValue": ".+",
         "current": {
           "selected": false,
-          "text": "v1.18.9-eks-d1db3c",
-          "value": "v1.18.9-eks-d1db3c"
+          "text": "app",
+          "value": "app"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "PBFA97CFB590B2093"
         },
-        "definition": "label_values(kube_node_info, kubelet_version)",
-        "hide": 2,
+        "definition": "",
+        "hide": 0,
         "includeAll": false,
         "multi": false,
-        "name": "k8s_version",
+        "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(kube_node_info, kubelet_version)",
-          "refId": "Prometheus-k8s_version-Variable-Query"
+          "query": "label_values(container_memory_usage_bytes{namespace=~\".+\",container!=\"POD\"},namespace)",
+          "refId": "Prometheus-namespace-Variable-Query"
         },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
+        "sort": 1,
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "selected": false,
+          "text": "preprocessing-image-utility",
+          "value": "preprocessing-image-utility"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "container",
+        "options": [],
+        "query": {
+          "query": "label_values(container_memory_usage_bytes{namespace=~\"$namespace\",container!=\"POD\"},container)",
+          "refId": "Prometheus-container-Variable-Query"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
         "type": "query",
         "useTags": false
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -1356,18 +1605,29 @@
       "5s",
       "10s",
       "30s",
-      "1m",
+      "2m",
       "5m",
       "15m",
       "30m",
       "1h",
       "2h",
       "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
     ]
   },
-  "timezone": "",
-  "title": "Kubernetes - Cluster Overview",
-  "uid": "4jSUaZ6Zz",
-  "version": 2,
+  "timezone": "browser",
+  "title": "Kubernetes App Metrics",
+  "uid": "VKL0YH1Z",
+  "version": 1,
   "weekStart": ""
 }
